@@ -1,4 +1,11 @@
 
+<?php
+
+include('../private/initialize.php');
+include('../private/customers_array.php')
+
+// $customers = $all_customers;
+?>
 <!doctype html>
 
 <html lang="en">
