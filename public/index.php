@@ -5,7 +5,13 @@ include('../private/customers_array.php');
 
 $per_page = 20;
 
+$total_count = count($all_customers);
+$total_pages = ceil($total_count / $per_page);
+
 $current_page = (int) ($_GET['page'] ?? 1);
+if($current_page < 1 || $current_page > $total_pages) {
+  $current_page = 1;
+}
 
 $offset = $per_page * ($current_page - 1);
 
@@ -18,11 +24,20 @@ $customers = array_slice($all_customers, $offset, $per_page);
 <html lang="en">
   <head>
     <title>Customer List</title>
-    <link rel="stylesheet" href="stylesheets/public.css">
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
 
     <h1>Customer List</h1>
+    <p class="page-status">
+      <?php echo "Total Results {$total_count}"; ?>
+    </p>
+    <p class="page-status">
+      <?php echo "Page {$current_page} of {$total_pages}"; ?>
+    </p>
+    <!-- <p class="page-status">
+      <?php echo "Displaying  {$total_count}"; ?>
+    </p> -->
 
     <table id="customer-list">
       <tr>
